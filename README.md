@@ -4,6 +4,99 @@ Hoje quero compartilhar uma abordagem prática para quem trabalha com **React Qu
 
 ---
 
+## Instalação e Execução do Projeto
+
+Siga os passos abaixo para configurar e rodar o projeto localmente:
+
+### Pré-requisitos
+
+- **Node.js** (versão 16 ou superior)
+- **npm** ou **yarn** instalado
+
+### Passo 1: Instale as dependências
+
+Com **npm**:
+
+```bash
+npm install
+```
+
+Ou com **yarn**:
+
+```bash
+yarn install
+```
+
+### Passo 2: Configure as variáveis de ambiente
+
+Crie um arquivo `.env.local` na raiz do projeto e adicione a seguinte variável:
+
+```
+API_URL=https://jsonplaceholder.typicode.com/users
+```
+
+Essa URL será utilizada para realizar as chamadas de API no projeto.
+
+### Passo 3: Execute o projeto
+
+Com **npm**:
+
+```bash
+npm run dev
+```
+
+Ou com **yarn**:
+
+```bash
+yarn dev
+```
+
+O projeto estará disponível em [http://localhost:3000](http://localhost:3000).
+
+---
+
+## URL da API Utilizada
+
+Neste projeto, utilizamos a API pública [JSONPlaceholder](https://jsonplaceholder.typicode.com) para simular chamadas de API. Especificamente, estamos consumindo o endpoint:
+
+```
+https://jsonplaceholder.typicode.com/users
+```
+
+### Sobre o Endpoint
+
+- **Descrição**: Retorna uma lista de usuários fictícios com informações como `id`, `name`, `username` e `email`.
+- **Exemplo de Resposta**:
+  ```json
+  [
+    {
+      "id": 1,
+      "name": "Leanne Graham",
+      "username": "Bret",
+      "email": "Sincere@april.biz"
+    },
+    {
+      "id": 2,
+      "name": "Ervin Howell",
+      "username": "Antonette",
+      "email": "Shanna@melissa.tv"
+    }
+    // ...outros usuários
+  ]
+  ```
+
+### Configuração no Projeto
+
+Certifique-se de configurar a variável de ambiente `API_URL` no arquivo `.env.local` com o valor:
+
+```
+API_URL=https://jsonplaceholder.typicode.com/users
+```
+
+Essa URL será utilizada para realizar as chamadas de API no projeto.
+
+---
+
 ## Actions do Users
 
 As actions são responsáveis por realizar as chamadas à API. Aqui está o exemplo usado no projeto:
