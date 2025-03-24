@@ -1,6 +1,6 @@
-# Como Criar Hooks Customizados com React Query e Manipular Query Strings no Next.js 🚀
+# Como Criar Hooks Customizados com React Query e Manipular Query Strings no Next.js
 
-Hoje quero compartilhar uma abordagem prática para quem trabalha com **React Query** e **Next.js**. Vou mostrar como criar hooks customizados para gerenciar chamadas de API e como manipular query strings na URL de forma simples e eficiente. Vamos lá! 👇
+Este guia apresenta uma abordagem prática para quem trabalha com **React Query** e **Next.js**. Ele mostra como criar hooks customizados para gerenciar chamadas de API e como manipular query strings na URL de forma simples e eficiente.
 
 ---
 
@@ -99,10 +99,10 @@ Essa URL será utilizada para realizar as chamadas de API no projeto.
 
 ## Actions do Users
 
-As actions são responsáveis por realizar as chamadas à API. Aqui está o exemplo usado no projeto:
+As actions são responsáveis por realizar as chamadas à API. Aqui está um exemplo:
 
 ```typescript
-// filepath: /Users/pedrovinicius/Study/get-cookies-server-side/src/app/actions/users.ts
+// filepath: /src/app/actions/users.ts
 'use server'
 
 import type { User } from '@/types/user'
@@ -146,10 +146,10 @@ export async function getUsers(params?: GetUsersParams): Promise<User[]> {
 
 ## Criando Hooks Customizados com React Query
 
-Os hooks customizados ajudam a centralizar a lógica de chamadas de API e o gerenciamento de estado. Aqui está um exemplo direto do meu projeto:
+Os hooks customizados ajudam a centralizar a lógica de chamadas de API e o gerenciamento de estado. Aqui está um exemplo:
 
 ```typescript
-// filepath: /Users/pedrovinicius/Study/get-cookies-server-side/src/hooks/useGetUsers.ts
+// filepath: /src/hooks/useGetUsers.ts
 import { getUsers, type GetUsersParams } from '@/app/actions/users'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 
@@ -192,10 +192,10 @@ export function useGetUsers(params: GetUsersParams) {
 
 ## Atualizando Query Strings da URL
 
-Manipular query strings é essencial para refletir o estado da aplicação na URL. Aqui está como fiz no componente `Home`:
+Manipular query strings é essencial para refletir o estado da aplicação na URL. Aqui está um exemplo de como fazer isso no componente `Home`:
 
 ```tsx
-// filepath: /Users/pedrovinicius/Study/get-cookies-server-side/src/views/Home/index.tsx
+// filepath: /src/views/Home/index.tsx
 'use client'
 
 import { useMemo } from 'react'
@@ -287,6 +287,4 @@ export default Home
 - **Query Strings**: Úteis para refletir o estado da aplicação na URL, facilitando o compartilhamento e a navegação.
 - **Actions**: Centralizam a lógica de chamadas à API, tornando o código mais organizado e reutilizável.
 
-Espero que essas dicas ajudem você a melhorar seus projetos com **Next.js** e **React Query**!
-
-Se você gostou, deixe um comentário ou compartilhe com alguém que pode se beneficiar. Vamos crescer juntos!
+Essas práticas podem ajudar a melhorar seus projetos com **Next.js** e **React Query**!
