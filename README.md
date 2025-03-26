@@ -192,19 +192,21 @@ export function useGetUsers(params: GetUsersParams) {
 
 ## Atualizando Query Strings da URL
 
-Manipular query strings é essencial para refletir o estado da aplicação na URL. Aqui está um exemplo de como fazer isso no componente `Home`:
+Manipular query strings é essencial para refletir o estado da aplicação na URL. Aqui está um exemplo de como isso foi implementado no projeto:
+
+### Componente `Search`
+
+O componente `Search` foi separado para lidar exclusivamente com a lógica de busca e atualização da query string:
 
 ```tsx
-// filepath: /src/views/Home/index.tsx
+// filepath: /src/views/Home/components/search.tsx
 'use client'
 
 import { useMemo } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-import { useGetUsers } from '@/hooks/useGetUsers'
-
-const Home = () => {
+const Search = () => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -216,8 +218,6 @@ const Home = () => {
       name: search || ''
     }
   }, [searchParams])
-
-  const { data: users, isLoading, isError } = useGetUsers(params)
 
   const handleSearch = useDebouncedCallback((search: string) => {
     const params = new URLSearchParams(searchParams)
@@ -232,19 +232,44 @@ const Home = () => {
   }, 300)
 
   return (
+    <div className='flex flex-col gap-1'>
+      <label>Usuários</label>
+      <input
+        name='search'
+        className='border-2 border-gray-300 rounded-md p-2 min-w-[250px]'
+        type='text'
+        placeholder='Buscar usuário'
+        defaultValue={params.name}
+        onChange={e => handleSearch(e.target.value)}
+      />
+    </div>
+  )
+}
+
+export default Search
+```
+
+### Componente `Home`
+
+O componente `Home` utiliza o hook `useGetUsers` para buscar os dados e exibi-los. Ele também utiliza o componente `Search` dentro de um `Suspense` para melhorar a experiência do usuário:
+
+```tsx
+// filepath: /src/views/Home/index.tsx
+'use client'
+
+import { Suspense } from 'react'
+import { useGetUsers } from '@/hooks/useGetUsers'
+import Search from './components/search'
+
+const Home = () => {
+  const { data: users, isLoading, isError } = useGetUsers({ name: '' })
+
+  return (
     <div className='flex items-center justify-center h-screen'>
       <div>
-        <div className='flex flex-col gap-1'>
-          <label>Usuários</label>
-          <input
-            name='search'
-            className='border-2 border-gray-300 rounded-md p-2 min-w-[250px]'
-            type='text'
-            placeholder='Buscar usuário'
-            defaultValue={params.name}
-            onChange={e => handleSearch(e.target.value)}
-          />
-        </div>
+        <Suspense fallback={<div>Carregando...</div>}>
+          <Search />
+        </Suspense>
         <div>
           {isLoading ? (
             <div className='border-2 border-gray-300 rounded-md p-2 mt-2'>
@@ -274,17 +299,12 @@ const Home = () => {
 export default Home
 ```
 
-### Como funciona:
-1. O campo de busca utiliza `useDebouncedCallback` para evitar chamadas excessivas à API enquanto o usuário digita.
-2. A função `handleSearch` atualiza a query string da URL com o valor digitado.
-3. A lista de usuários é exibida utilizando o hook `useGetUsers`.
-
 ---
 
 ## Dicas Finais
 
 - **React Query**: Simplifica o gerenciamento de estado assíncrono e melhora a experiência do usuário com cache e revalidação automática.
 - **Query Strings**: Úteis para refletir o estado da aplicação na URL, facilitando o compartilhamento e a navegação.
-- **Actions**: Centralizam a lógica de chamadas à API, tornando o código mais organizado e reutilizável.
+- **Componentização**: Separar a lógica em componentes menores, como o `Search`, torna o código mais organizado e reutilizável.
 
 Essas práticas podem ajudar a melhorar seus projetos com **Next.js** e **React Query**!
