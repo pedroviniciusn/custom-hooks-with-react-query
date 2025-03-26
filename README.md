@@ -55,45 +55,31 @@ O projeto estará disponível em [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## URL da API Utilizada
+## API Utilizada
 
-Neste projeto, utilizamos a API pública [JSONPlaceholder](https://jsonplaceholder.typicode.com) para simular chamadas de API. Especificamente, estamos consumindo o endpoint:
+Neste projeto, utilizamos a API pública [JSONPlaceholder](https://jsonplaceholder.typicode.com) para simular chamadas de API. O endpoint configurado na variável de ambiente `API_URL` retorna uma lista de usuários fictícios com informações como `id`, `name`, `username` e `email`.
 
-```
-https://jsonplaceholder.typicode.com/users
-```
+### Exemplo de Resposta
 
-### Sobre o Endpoint
-
-- **Descrição**: Retorna uma lista de usuários fictícios com informações como `id`, `name`, `username` e `email`.
-- **Exemplo de Resposta**:
-  ```json
-  [
-    {
-      "id": 1,
-      "name": "Leanne Graham",
-      "username": "Bret",
-      "email": "Sincere@april.biz"
-    },
-    {
-      "id": 2,
-      "name": "Ervin Howell",
-      "username": "Antonette",
-      "email": "Shanna@melissa.tv"
-    }
-    // ...outros usuários
-  ]
-  ```
-
-### Configuração no Projeto
-
-Certifique-se de configurar a variável de ambiente `API_URL` no arquivo `.env.local` com o valor:
-
-```
-API_URL=https://jsonplaceholder.typicode.com/users
+```json
+[
+  {
+    "id": 1,
+    "name": "Leanne Graham",
+    "username": "Bret",
+    "email": "Sincere@april.biz"
+  },
+  {
+    "id": 2,
+    "name": "Ervin Howell",
+    "username": "Antonette",
+    "email": "Shanna@melissa.tv"
+  }
+  // ...outros usuários
+]
 ```
 
-Essa URL será utilizada para realizar as chamadas de API no projeto.
+Certifique-se de configurar corretamente a variável `API_URL` no arquivo `.env.local` para que as chamadas à API funcionem.
 
 ---
 
