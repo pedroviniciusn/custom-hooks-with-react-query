@@ -10,7 +10,7 @@ Siga os passos abaixo para configurar e rodar o projeto localmente:
 
 ### Pré-requisitos
 
-- **Node.js** (versão 16 ou superior)
+- **Node.js** (versão 18 ou superior)
 - **npm** ou **yarn** instalado
 
 ### Passo 1: Instale as dependências
